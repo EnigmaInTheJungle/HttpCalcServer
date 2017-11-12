@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HttpCalcServer
+namespace HttpServer
 {
     class Program
     {
         static void Main(string[] args)
         {
+            HttpServer server = new HttpServer("http://localhost:2345/");
+            server.Start();
         }
     }
 }
