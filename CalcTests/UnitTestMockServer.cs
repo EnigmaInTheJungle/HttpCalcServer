@@ -63,9 +63,6 @@ namespace CalcTests
             }
 
             Assert.AreEqual(expected, actual);
-
-            // assert
-            //actual.Should().Be(expected);
         }
     }
 }

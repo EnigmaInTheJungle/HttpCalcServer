@@ -4,19 +4,28 @@ using System.Net;
 using System.IO;
 using Moq;
 using System.Text;
+using TestStack.White;
+using System.Reflection;
 
 namespace CalcTests
 {
     [TestFixture]
     public class UnitTestProtocol
     {
-        HttpServer.HttpServer server = null;
+        Application app = null;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Init()
         {
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://test/");
-            server = new HttpServer.HttpServer("http://test/");
+            var outputDir = new DirectoryInfo(Assembly.GetExecutingAssembly().Location).Parent.FullName;
+            var appPath = outputDir + @"\HttpCalcServer.exe";
+            app = Application.Launch(appPath);
+        }
+
+        [OneTimeTearDown]
+        public void CloseServer()
+        {
+            app.Close();
         }
 
         [TestCase("1", "2", "%2B", 3)]
